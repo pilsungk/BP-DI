@@ -1,4 +1,4 @@
-# BP-DI
+# Barren Plateaus - Destructive Interference 
 
 This repository contains experiment scripts for comparing the hardware-efficient ansatz (HEA) and the Hamiltonian variational ansatz (HVA) using destructive-interference diagnostics.
 
