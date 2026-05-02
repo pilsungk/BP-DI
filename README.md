@@ -1,4 +1,4 @@
-# Barren Plateaus - Destructive Interference 
+# Barren Plateaus = Destructive Interference
 
 This repository contains experiment scripts for comparing the hardware-efficient ansatz (HEA) and the Hamiltonian variational ansatz (HVA) using destructive-interference diagnostics.
 
@@ -11,13 +11,8 @@ At the current stage, the repository includes two experiment drivers:
 
 This codebase supports the experimental comparison of HEA and HVA under two closely related Ising-model settings:
 
-1. **TFIM**
-   - Script: `bp_hva_vs_hea_save_per_run_v4.py`
-   - Goal: compare HEA and HVA on the transverse-field Ising model using destructive-interference diagnostics
-
-2. **LFIM**
-   - Script: `bp_hva_vs_hea_lfim_save_per_run_v1.py`
-   - Goal: compare HEA and HVA on a longitudinal-field extension of the Ising model using the same diagnostic framework
+1. **TFIM** — `bp_hva_vs_hea_save_per_run_v4.py`: compare HEA and HVA on the transverse-field Ising model using destructive-interference diagnostics.
+2. **LFIM** — `bp_hva_vs_hea_lfim_save_per_run_v1.py`: compare HEA and HVA on a longitudinal-field extension of the Ising model using the same diagnostic framework.
 
 ## Included Scripts
 
@@ -25,7 +20,17 @@ This codebase supports the experimental comparison of HEA and HVA under two clos
 
 Compares HEA and HVA on the transverse-field Ising model (TFIM).
 
-Main outputs:
+**Hamiltonian** (open boundary conditions):
+
+```
+H = - sum_i Z_i Z_{i+1} + h sum_i X_i
+```
+
+**Ansatz definitions**:
+- **HEA**: each layer applies trainable `RY-RZ` rotations on every qubit, followed by a CNOT ring entangler.
+- **HVA**: each layer applies `exp(-i beta sum X_i)` followed by `exp(-i gamma sum Z_i Z_{i+1})`. Implemented exactly using commuting gate products: `RX(2*beta)` on each qubit and `RZZ(2*gamma)` on each edge.
+
+**Main outputs**:
 - `per_run.csv`
 - `grad_mean_check.csv`
 - `layer_summary.csv`
@@ -33,17 +38,8 @@ Main outputs:
 - `summary.json`
 - `figures/*.pdf`
 
-Ansatz definitions:
-- **HEA**: each layer applies trainable `RY-RZ` rotations on every qubit, followed by an entangler ring
-- **HVA**: each layer applies
-  - `exp(-i beta sum X_i)`
-  - then `exp(-i gamma sum Z_i Z_{i+1})`
+**Example**:
 
-Implemented exactly using commuting gate products:
-- `RX(2*beta)` on each qubit
-- `RZZ(2*gamma)` on each edge
-
-Example:
 ```bash
 python bp_hva_vs_hea_save_per_run_v4.py \
     --n_qubits 4,6 \
@@ -52,39 +48,31 @@ python bp_hva_vs_hea_save_per_run_v4.py \
     --outdir_root ./runs \
     --save_raw_terms false
 ```
-### bp_hva_vs_hea_lfim_save_per_run_v1.py
+
+### `bp_hva_vs_hea_lfim_save_per_run_v1.py`
 
 Compares HEA and HVA on the longitudinal-field Ising model (LFIM).
-Hamiltonian:
-H = - sum_i Z_i Z_{i+1} + hx sum_i X_i + hz sum_i Z_i   (OBC)
 
-Main outputs:
+**Hamiltonian** (open boundary conditions):
 
-per_run.csv
-layer_summary.csv
-structure_compare.csv
-summary.json
-figures/*.pdf
-
-Ansatz definitions:
-
-HEA: each layer applies trainable RY-RZ rotations on every qubit, followed by an entangler ring
-HVA: each layer applies
-
-exp(-i beta_x sum X_i)
-then exp(-i gamma_zz sum Z_i Z_i+1)
-then exp(-i beta_z sum Z_i)
-
-
-
-Implemented exactly using commuting gate products:
-
-RX(2*beta_x) on each qubit
-RZZ(2*gamma_zz) on each edge
-RZ(2*beta_z) on each qubit
-
-Example:
 ```
+H = - sum_i Z_i Z_{i+1} + h_x sum_i X_i + h_z sum_i Z_i
+```
+
+**Ansatz definitions**:
+- **HEA**: each layer applies trainable `RY-RZ` rotations on every qubit, followed by a CNOT ring entangler.
+- **HVA**: each layer applies `exp(-i beta_x sum X_i)`, then `exp(-i gamma_zz sum Z_i Z_{i+1})`, then `exp(-i beta_z sum Z_i)`. Implemented exactly using commuting gate products: `RX(2*beta_x)` on each qubit, `RZZ(2*gamma_zz)` on each edge, and `RZ(2*beta_z)` on each qubit.
+
+**Main outputs**:
+- `per_run.csv`
+- `layer_summary.csv`
+- `structure_compare.csv`
+- `summary.json`
+- `figures/*.pdf`
+
+**Example**:
+
+```bash
 python bp_hva_vs_hea_lfim_save_per_run_v1.py \
     --n_qubits 4,6 \
     --depths 4,6 \
@@ -93,11 +81,24 @@ python bp_hva_vs_hea_lfim_save_per_run_v1.py \
     --save_raw_terms false
 ```
 
-Notes
+## Notes
 
-Both scripts are designed to save run-level results for later aggregation and analysis.
-The repository is currently minimal and contains only the core experiment scripts.
-Please refer to the script headers for the current command-line options and output details.
+- Both scripts save run-level results for later aggregation and analysis.
+- The repository is currently minimal and contains only the core experiment scripts.
+- Please refer to the script headers for the current command-line options and output details.
 
-Status
+## Status
+
 This repository is currently under active development.
+
+## Citation
+
+If you use this code, please cite the accompanying paper:
+
+```
+[BibTeX entry to be added after arXiv submission]
+```
+
+## License
+
+[To be added]
