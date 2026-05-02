@@ -4,7 +4,7 @@ This repository contains experiment scripts for comparing the hardware-efficient
 
 At the current stage, the repository includes two experiment drivers:
 
-- `bp_hva_vs_hea_save_per_run_v3.py`
+- `bp_hva_vs_hea_save_per_run_v4.py`
 - `bp_hva_vs_hea_lfim_save_per_run_v1.py`
 
 ## Overview
@@ -12,7 +12,7 @@ At the current stage, the repository includes two experiment drivers:
 This codebase supports the experimental comparison of HEA and HVA under two closely related Ising-model settings:
 
 1. **TFIM**
-   - Script: `bp_hva_vs_hea_save_per_run_v3.py`
+   - Script: `bp_hva_vs_hea_save_per_run_v4.py`
    - Goal: compare HEA and HVA on the transverse-field Ising model using destructive-interference diagnostics
 
 2. **LFIM**
@@ -21,7 +21,7 @@ This codebase supports the experimental comparison of HEA and HVA under two clos
 
 ## Included Scripts
 
-### `bp_hva_vs_hea_save_per_run_v3.py`
+### `bp_hva_vs_hea_save_per_run_v4.py`
 
 Compares HEA and HVA on the transverse-field Ising model (TFIM).
 
@@ -45,14 +45,15 @@ Implemented exactly using commuting gate products:
 
 Example:
 ```bash
-python bp_hva_vs_hea_save_per_run_v3.py \
+python bp_hva_vs_hea_save_per_run_v4.py \
     --n_qubits 4,6 \
     --depths 4,6 \
     --seeds 10 \
     --outdir_root ./runs \
     --save_raw_terms false
+```
+### bp_hva_vs_hea_lfim_save_per_run_v1.py
 
-bp_hva_vs_hea_lfim_save_per_run_v1.py
 Compares HEA and HVA on the longitudinal-field Ising model (LFIM).
 Hamiltonian:
 H = - sum_i Z_i Z_{i+1} + hx sum_i X_i + hz sum_i Z_i   (OBC)
@@ -83,17 +84,14 @@ RZZ(2*gamma_zz) on each edge
 RZ(2*beta_z) on each qubit
 
 Example:
+```
 python bp_hva_vs_hea_lfim_save_per_run_v1.py \
     --n_qubits 4,6 \
     --depths 4,6 \
     --seeds 10 \
     --outdir_root ./runs \
     --save_raw_terms false
-
-Default Run
-Each script can also be executed with its default settings:
-python bp_hva_vs_hea_save_per_run_v3.py
-python bp_hva_vs_hea_lfim_save_per_run_v1.py
+```
 
 Notes
 
