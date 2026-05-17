@@ -1,4 +1,4 @@
-# Barren Plateaus = Destructive Interference
+# Barren Plateaus as Destructive Interference
 
 This repository contains experiment scripts for comparing the hardware-efficient ansatz (HEA) and the Hamiltonian variational ansatz (HVA) using destructive-interference diagnostics.
 
@@ -96,9 +96,17 @@ This repository is currently under active development.
 If you use this code, please cite the accompanying paper:
 
 ```
-[BibTeX entry to be added after arXiv submission]
+@misc{kang:2026:bp-di,
+      title={Barren Plateaus as Destructive Interference: A Diagnostic Framework and Implications for Structured Ansatzes}, 
+      author={Pilsung Kang},
+      year={2026},
+      eprint={2605.01319},
+      archivePrefix={arXiv},
+      primaryClass={quant-ph},
+      url={https://arxiv.org/abs/2605.01319}, 
+}
 ```
 
 ## License
 
-[To be added]
+This code is released under the MIT License. See the LICENSE file for details.
